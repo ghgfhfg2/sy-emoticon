@@ -177,7 +177,6 @@ function Header({ logoImg }) {
           )}
         </ul>
       </HeaderTop>
-      <GoogleAd />
       {isLoginPop && <Login closePop={closeIsLoginPop} />}
       {isJoinPop && <Join closePop={closeIsJoinPop} />}
     </>

@@ -8,6 +8,7 @@ import { Button, Spinner, useToast } from "@chakra-ui/react";
 import { EmoticonList } from "@component/CommonStyled";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { TagListBox } from "../CommonStyled";
+import GoogleAd from "../GoogleAd";
 
 export default function Mypage() {
   const toast = useToast();
@@ -62,6 +63,7 @@ export default function Mypage() {
 
   return (
     <div className="content_box">
+      <GoogleAd />
       {isLoading && (
         <Spinner
           style={{

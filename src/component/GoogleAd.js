@@ -21,7 +21,7 @@ const GoogleAd = () => {
           background: "#e9e9e9",
           color: "black",
           minHeight: "50px",
-          marginTop: "20px",
+          margin: "20px 0",
           fontSize: "18px",
           fontWeight: "bold",
           textAlign: "center",
@@ -36,7 +36,7 @@ const GoogleAd = () => {
       style={{
         display: "block",
         textAlign: "center",
-        marginBottom: "20px",
+        margin: "20px 0",
       }}
       data-ad-layout="in-article"
       data-ad-format="fluid"

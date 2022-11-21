@@ -96,7 +96,7 @@ export const CommonPopup = styled.div`
 
 export const Notice = styled.div`
   margin: 25px auto 0 auto;
-  width: 90vw;
+  width: 90%;
   max-width: 1200px;
 `;
 

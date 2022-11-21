@@ -118,6 +118,7 @@ export default function Main() {
 
   return (
     <div className="content_box">
+      <GoogleAd />
       {isLoading && (
         <Spinner
           style={{

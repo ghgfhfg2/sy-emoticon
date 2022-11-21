@@ -18,6 +18,7 @@ import { onValue, orderByChild, query, ref, set } from "firebase/database";
 import { format } from "date-fns";
 import LoginLayout from "@component/LoginLayout";
 import shortid from "shortid";
+import GoogleAd from "./GoogleAd";
 
 export default function AddComponent() {
   const toast = useToast();
@@ -75,6 +76,7 @@ export default function AddComponent() {
 
   return (
     <>
+      <GoogleAd />
       <Notice>
         <Flex alignItems="center">
           <AiOutlineNotification style={{ marginRight: "10px" }} />
@@ -85,7 +87,7 @@ export default function AddComponent() {
         </Flex>
       </Notice>
 
-      <form style={{ width: "100vw" }} onSubmit={handleSubmit(onSubmit)}>
+      <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
         <Flex justifyContent="center" marginTop={10}>
           <Flex
             width="90%"
