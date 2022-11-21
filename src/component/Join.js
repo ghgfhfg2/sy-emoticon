@@ -44,6 +44,7 @@ function Join({ closePop }) {
         });
         dispatch(setUser(user));
         toast({
+          position: "top",
           description: "가입 되었습니다 :)",
           status: "success",
           duration: 1000,

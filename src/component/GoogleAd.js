@@ -21,7 +21,7 @@ const GoogleAd = () => {
           background: "#e9e9e9",
           color: "black",
           minHeight: "50px",
-          marginBottom: "20px",
+          marginTop: "20px",
           fontSize: "18px",
           fontWeight: "bold",
           textAlign: "center",

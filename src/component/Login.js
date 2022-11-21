@@ -34,6 +34,7 @@ function Login({ closePop }) {
           window.sessionStorage.setItem("isLogin", true);
           // ...
           toast({
+            position: "top",
             description: `로그인 되었습니다.`,
             status: "success",
             duration: 1000,
@@ -46,6 +47,7 @@ function Login({ closePop }) {
           const errorMessage = error.message;
           if (errorCode === "auth/user-not-found") {
             toast({
+              position: "top",
               description: `없는 이메일주소 입니다.`,
               status: "error",
               duration: 1000,
@@ -54,6 +56,7 @@ function Login({ closePop }) {
           }
           if (errorCode === "auth/wrong-password") {
             toast({
+              position: "top",
               description: `잘못된 비밀번호 입니다.`,
               status: "error",
               duration: 1000,
@@ -62,6 +65,7 @@ function Login({ closePop }) {
           }
           if (errorCode === "auth/too-many-requests") {
             toast({
+              position: "top",
               description: `반복된 요청으로 인한 오류입니다.\n잠시 후 시도해 주세요.`,
               status: "error",
               duration: 1000,

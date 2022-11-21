@@ -10,6 +10,7 @@ import { BiUser } from "react-icons/bi";
 import { TbLogout } from "react-icons/tb";
 import Login from "./Login";
 import Join from "./Join";
+import GoogleAd from "./GoogleAd";
 
 const HeaderTop = styled.div`
   width: 100%;
@@ -98,6 +99,7 @@ function Header({ logoImg }) {
       .then((res) => {
         dispatch(clearUser());
         toast({
+          position: "top",
           description: `로그아웃 되었습니다.`,
           status: "success",
           duration: 1000,
@@ -175,6 +177,7 @@ function Header({ logoImg }) {
           )}
         </ul>
       </HeaderTop>
+      <GoogleAd />
       {isLoginPop && <Login closePop={closeIsLoginPop} />}
       {isJoinPop && <Join closePop={closeIsJoinPop} />}
     </>

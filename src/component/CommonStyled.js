@@ -1,5 +1,18 @@
 import styled from "styled-components";
 
+export const TagListBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: sticky;
+  top: 60px;
+  background: #fff;
+  padding: 15px 0;
+  button {
+    font-size: 14px;
+  }
+`;
+
 export const EmoticonList = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -85,4 +98,25 @@ export const Notice = styled.div`
   margin: 25px auto 0 auto;
   width: 90vw;
   max-width: 1200px;
+`;
+
+export const BtnTop = styled.button`
+  background: #fff;
+  border: 1px solid #3182ce;
+  border-radius: 5px;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  color: #3182ce;
+  font-size: 20px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+  &:hover {
+    font-size: 24px;
+  }
 `;

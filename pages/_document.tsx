@@ -7,14 +7,26 @@ class MyDocument extends Document {
         <Head>
           <title>텍스트 이모티콘 모음</title>
           <meta
+            name="keywords"
+            content="Text,Emoticon,Text Emoticon,Kaomoji,Face Emoticon,Face,Instagram Emoticon,Lenny Face,Lenny,Symbol,Text Symbol,Artful,Face Type,Designed Text,이모티콘,특수기호,인싸티콘,특수문자,텍대,텍스트"
+          />
+          <meta
             name="description"
-            content={"특수문자를 이용한 텍스트 이모티콘 모음."}
+            content="텍스트와 특수문자로 이루어진 이모티콘을 보다 쉽게 관리해 보세요.!"
           />
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
-          <meta property="og:title" content="텍스트 이모티콘 모음" />
+          <meta
+            property="og:site_name"
+            content="텍스트 이모티콘 모음 - Text Emoticon collection"
+          />
+          <meta
+            property="og:title"
+            content="텍스트 이모티콘 모음 - Text Emoticon collection"
+          />
+          <meta property="og:url" content="https://emoticon.sooyadev.com/" />
           <meta property="og:type" content="website" />
           <script
             async

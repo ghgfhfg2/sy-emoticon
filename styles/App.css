@@ -20,7 +20,7 @@ html {
 
 .content_box {
   flex: 1;
-  padding: 1rem 3rem; }
+  padding: 0 3rem 1rem 3rem; }
 
 .custom__scroll_bar::-webkit-scrollbar {
   width: 5px; }

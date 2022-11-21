@@ -13,7 +13,7 @@ import {
 import { dbData, tagList } from "./db";
 import { Button, Flex, Spinner, useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { EmoticonList } from "@component/CommonStyled";
+import { EmoticonList, TagListBox } from "@component/CommonStyled";
 import GoogleAd from "./GoogleAd";
 
 export default function Main() {
@@ -21,7 +21,7 @@ export default function Main() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.currentUser);
 
-  const [type, setType] = useState();
+  const [type, setType] = useState("");
   const typeSort = (type) => {
     setType(type);
   };
@@ -33,7 +33,7 @@ export default function Main() {
     setIsLoading(true);
     const getEmoList = new Promise((resolve) => {
       arr = dbData.map((el) => {
-        if (userInfo && userInfo?.favor.includes(el.uid)) {
+        if (userInfo && userInfo.favor?.includes(el.uid)) {
           el.favor = 1;
         } else {
           el.favor = 0;
@@ -56,6 +56,7 @@ export default function Main() {
   const onCopy = (el) => {
     navigator.clipboard.writeText(el.emo);
     toast({
+      position: "top",
       description: `${el.emo} 가 복사 되었습니다.`,
       status: "success",
       duration: 1000,
@@ -66,6 +67,7 @@ export default function Main() {
   const onFavor = (el) => {
     if (!userInfo) {
       toast({
+        position: "top",
         description: `로그인이 필요합니다.`,
         status: "info",
         duration: 1000,
@@ -81,6 +83,7 @@ export default function Main() {
         if (pre.find((list) => list === el.uid)) {
           newFavor = newFavor.filter((e) => e !== el.uid);
           toast({
+            position: "top",
             description: `${el.emo} 즐찾 취소 되었습니다.`,
             status: "success",
             duration: 1000,
@@ -89,6 +92,7 @@ export default function Main() {
         } else {
           newFavor = [...pre, el.uid];
           toast({
+            position: "top",
             description: `${el.emo} 즐찾 추가 되었습니다.`,
             status: "success",
             duration: 1000,
@@ -98,6 +102,7 @@ export default function Main() {
       } else {
         newFavor = [el.uid];
         toast({
+          position: "top",
           description: `${el.emo} 즐찾 추가 되었습니다.`,
           status: "success",
           duration: 1000,
@@ -113,7 +118,17 @@ export default function Main() {
 
   return (
     <div className="content_box">
-      <Flex justifyContent="center" mb={5}>
+      {isLoading && (
+        <Spinner
+          style={{
+            position: "fixed",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        />
+      )}
+      <TagListBox>
         {tagList && (
           <>
             <Button
@@ -138,39 +153,28 @@ export default function Main() {
             ))}
           </>
         )}
-      </Flex>
-      {isLoading ? (
-        <>
-          <Flex justifyContent="center" alignItems="center">
-            <Spinner />
-          </Flex>
-        </>
-      ) : (
-        <>
-          <GoogleAd />
-          <EmoticonList>
-            {emoticonList &&
-              emoticonList.map((el) => (
-                <li key={el.uid}>
-                  <button
-                    type="button"
-                    className="btn_emo"
-                    onClick={() => onCopy(el)}
-                  >
-                    {el.emo}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn_favor"
-                    onClick={() => onFavor(el)}
-                  >
-                    {el.favor ? <MdFavorite /> : <MdFavoriteBorder />}
-                  </button>
-                </li>
-              ))}
-          </EmoticonList>
-        </>
-      )}
+      </TagListBox>
+      <EmoticonList>
+        {emoticonList &&
+          emoticonList.map((el) => (
+            <li key={el.uid}>
+              <button
+                type="button"
+                className="btn_emo"
+                onClick={() => onCopy(el)}
+              >
+                {el.emo}
+              </button>
+              <button
+                type="button"
+                className="btn_favor"
+                onClick={() => onFavor(el)}
+              >
+                {el.favor ? <MdFavorite /> : <MdFavoriteBorder />}
+              </button>
+            </li>
+          ))}
+      </EmoticonList>
     </div>
   );
 }

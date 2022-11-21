@@ -39,6 +39,7 @@ export default function AddComponent() {
       const eRef = ref(db, `apply/${uid}`);
       if (values.emoticon.length > 500) {
         toast({
+          position: "top",
           description: `이모티콘은 500자 이내로 입력해 주세요.`,
           status: "error",
           duration: 1000,
@@ -48,6 +49,7 @@ export default function AddComponent() {
       }
       if (values.info.length > 100) {
         toast({
+          position: "top",
           description: `설명은 200자 이내로 입력해 주세요.`,
           status: "error",
           duration: 1000,
@@ -60,6 +62,7 @@ export default function AddComponent() {
         date: new Date().getTime(),
       }).then(() => {
         toast({
+          position: "top",
           description: `등록 되었습니다.`,
           status: "success",
           duration: 1000,
