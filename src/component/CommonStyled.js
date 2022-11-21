@@ -11,6 +11,13 @@ export const TagListBox = styled.div`
   button {
     font-size: 14px;
   }
+  @media screen and (max-width: 1024px) {
+    position: relative;
+    top: 0;
+    button {
+      font-size: 12px;
+    }
+  }
 `;
 
 export const EmoticonList = styled.ul`
@@ -43,6 +50,13 @@ export const EmoticonList = styled.ul`
       color: #c53030;
       font-size: 16px;
       border-left: 1px solid #ddd;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    li {
+      .btn_emo {
+        padding: 5px 8px;
+      }
     }
   }
 `;
@@ -118,5 +132,13 @@ export const BtnTop = styled.button`
   transition: all 0.2s;
   &:hover {
     font-size: 24px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+    &:hover {
+      font-size: 18px;
+    }
   }
 `;
