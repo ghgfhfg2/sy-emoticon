@@ -19,6 +19,8 @@
     "firebase": "^9.9.4",
     "framer-motion": "^7.2.1",
     "next": "12.2.5",
+    "next-compose-plugins": "^2.2.1",
+    "next-pwa": "^5.5.4",
     "next-redux-wrapper": "^7.0.5",
     "nprogress": "^0.2.0",
     "promise": "^8.2.0",

@@ -30,13 +30,18 @@ export const EmoticonList = styled.ul`
     cursor: pointer;
     border: 1px solid #ddd;
     border-radius: 3px;
-    margin: 4px;
+    margin: 5px;
+    transition: all 0.1s;
+    &:hover {
+      background: #fff;
+      transform: scale(1.3);
+    }
     button {
       border: 0;
       background: none;
       cursor: pointer;
       &:hover {
-        background: #f5f5f5;
+        background: #f9f9f9;
       }
     }
     .btn_emo {
@@ -58,6 +63,45 @@ export const EmoticonList = styled.ul`
         padding: 5px 8px;
       }
     }
+  }
+`;
+
+export const ApplyList = styled.ul`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1.5rem;
+  li {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &.ready {
+    }
+    &.finish {
+      background: #f5f5f5;
+      color: #888;
+    }
+    button {
+      color: #fff;
+    }
+  }
+  .state {
+    font-size: 13px;
+    margin-right: 1rem;
+  }
+  .desc {
+    display: flex;
+    flex-direction: column;
+  }
+  .emo {
+    font-weight: bold;
+  }
+  .date {
+    color: #999;
+    font-size: 12px;
   }
 `;
 

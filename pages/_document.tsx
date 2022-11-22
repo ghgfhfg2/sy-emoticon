@@ -28,6 +28,8 @@ class MyDocument extends Document {
           />
           <meta property="og:url" content="https://emoticon.sooyadev.com/" />
           <meta property="og:type" content="website" />
+          <meta name="theme-color" content="#3182CE" />
+          <link rel="manifest" href="/manifest.json" />
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6788425959877259"

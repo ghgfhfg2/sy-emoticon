@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineNotification } from "react-icons/ai";
-import { Notice } from "./CommonStyled";
+import { Notice, ApplyList } from "./CommonStyled";
 import { useForm } from "react-hook-form";
 import {
   FormErrorMessage,
@@ -12,27 +12,101 @@ import {
   Stack,
   Radio,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 import { db } from "src/firebase";
-import { onValue, orderByChild, query, ref, set } from "firebase/database";
+import {
+  equalTo,
+  onValue,
+  orderByChild,
+  query,
+  ref,
+  set,
+  off,
+  remove,
+  limitToLast,
+  update,
+  limitToFirst,
+  runTransaction,
+} from "firebase/database";
 import { format } from "date-fns";
 import LoginLayout from "@component/LoginLayout";
 import shortid from "shortid";
 import GoogleAd from "./GoogleAd";
+import { useSelector } from "react-redux";
 
 export default function AddComponent() {
+  const userInfo = useSelector((state) => state.user.currentUser);
   const toast = useToast();
   const {
     handleSubmit,
     register,
+    resetField,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const [replyData, setReplyData] = useState();
   useEffect(() => {
-    const rRef = query(ref(db, `apply`), orderByChild("date"));
-    return () => {};
-  }, []);
+    if (userInfo) {
+      let rRef = query(
+        ref(db, `apply`),
+        orderByChild("userUid"),
+        equalTo(userInfo.uid)
+      );
+      if (userInfo.admin) {
+        rRef = query(ref(db, `apply`), orderByChild("date"), limitToLast(30));
+      }
+      onValue(rRef, (data) => {
+        let arr = [];
+        for (const key in data.val()) {
+          arr.push({ ...data.val()[key], uid: key });
+        }
+        arr.sort((a, b) => b.date - a.date);
+        setReplyData(arr);
+      });
+    }
+    return () => {
+      if (userInfo) {
+        off(query(ref(db, `apply`)));
+      }
+    };
+  }, [userInfo]);
+
+  const onResetField = () => {
+    resetField("emoticon");
+    resetField("info");
+  };
+
+  const onRemove = (uid) => {
+    const agree = confirm("삭제하시겠습니까?");
+    if (agree) {
+      const rRef = ref(db, `apply/${uid}`);
+      remove(rRef).then(() => {
+        toast({
+          position: "top",
+          description: `삭제되었습니다.`,
+          status: "success",
+          duration: 1000,
+          isClosable: false,
+        });
+      });
+    }
+  };
+
+  const onFinish = (uid) => {
+    const rRef = ref(db, `apply/${uid}/finish`);
+    runTransaction(rRef, (pre) => {
+      return !pre;
+    }).then(() => {
+      toast({
+        position: "top",
+        description: `업데이트 되었습니다.`,
+        status: "success",
+        duration: 1000,
+        isClosable: false,
+      });
+    });
+  };
 
   const onSubmit = (values) => {
     return new Promise((resolve) => {
@@ -60,6 +134,8 @@ export default function AddComponent() {
       }
       set(eRef, {
         ...values,
+        userUid: userInfo.uid,
+        finish: false,
         date: new Date().getTime(),
       }).then(() => {
         toast({
@@ -70,6 +146,7 @@ export default function AddComponent() {
           isClosable: false,
         });
       });
+      onResetField();
       resolve();
     });
   };
@@ -132,6 +209,47 @@ export default function AddComponent() {
                 {isSubmitting}
               </Button>
             </Flex>
+            <ApplyList>
+              {replyData &&
+                replyData.map((el, idx) => (
+                  <>
+                    <li key={idx} className={el.finish ? "finish" : "ready"}>
+                      <Flex alignItems="center">
+                        <div className="state">
+                          {el.finish ? "완료" : "대기"}
+                        </div>
+                        <div className="desc">
+                          <span className="emo">{el.emoticon}</span>
+                          <span className="info">{el.info}</span>
+                        </div>
+                      </Flex>
+                      <div className="right">
+                        <span className="date">
+                          {format(new Date(el.date), "yyyy-MM-dd hh:mm")}
+                        </span>
+                        <Button
+                          colorScheme="red"
+                          size="sm"
+                          ml={2}
+                          onClick={() => onRemove(el.uid)}
+                        >
+                          삭제
+                        </Button>
+                        {userInfo?.admin && (
+                          <Button
+                            colorScheme="blue"
+                            size="sm"
+                            ml={2}
+                            onClick={() => onFinish(el.uid)}
+                          >
+                            {el.finish ? "적용 취소" : "적용 완료"}
+                          </Button>
+                        )}
+                      </div>
+                    </li>
+                  </>
+                ))}
+            </ApplyList>
           </Flex>
         </Flex>
       </form>
