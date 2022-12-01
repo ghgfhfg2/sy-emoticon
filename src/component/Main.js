@@ -11,10 +11,16 @@ import {
   off,
 } from "firebase/database";
 import { dbData, tagList } from "./db";
-import { Button, Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Button, Flex, Input, Spinner, useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { EmoticonList, TagListBox } from "@component/CommonStyled";
+import {
+  EmoticonList,
+  TagListBox,
+  H2Style,
+  Notice,
+} from "@component/CommonStyled";
 import GoogleAd from "./GoogleAd";
+import { AiOutlineNotification } from "react-icons/ai";
 
 export default function Main() {
   const toast = useToast();
@@ -116,6 +122,12 @@ export default function Main() {
     });
   };
 
+  const [ranEmoNum, setRanEmoNum] = useState();
+  const randomEmoticon = () => {
+    let num = Math.floor(Math.random() * emoticonList.length) + 1;
+    setRanEmoNum(num);
+  };
+
   return (
     <div className="content_box">
       <GoogleAd />
@@ -129,6 +141,17 @@ export default function Main() {
           }}
         />
       )}
+      <Flex alignItems="flex-start">
+        <AiOutlineNotification
+          style={{ marginTop: "3px", marginRight: "10px" }}
+        />
+        <Flex flexDirection="column">
+          <p>
+            - 이모티콘 신청을 통해 새로운 이모티콘이 계속 추가 될 예정입니다 :)
+          </p>
+          <p>- 감정 태그는 현재 업데이트 진행중 입니다. </p>
+        </Flex>
+      </Flex>
       <TagListBox>
         {tagList && (
           <>
@@ -155,6 +178,34 @@ export default function Main() {
           </>
         )}
       </TagListBox>
+      <H2Style>특수문자 이모티콘</H2Style>
+      <Flex justifyContent="center" alignContent="center" mb={2}>
+        <Button onClick={randomEmoticon}>랜덤으로 뽑아보기</Button>
+        <EmoticonList style={{ marginLeft: "5px" }}>
+          {emoticonList && ranEmoNum && (
+            <li key={emoticonList[ranEmoNum].uid} style={{ margin: "0" }}>
+              <button
+                type="button"
+                className="btn_emo"
+                onClick={() => onCopy(emoticonList[ranEmoNum])}
+              >
+                {emoticonList[ranEmoNum].emo}
+              </button>
+              <button
+                type="button"
+                className="btn_favor"
+                onClick={() => onFavor(emoticonList[ranEmoNum])}
+              >
+                {emoticonList[ranEmoNum].favor ? (
+                  <MdFavorite />
+                ) : (
+                  <MdFavoriteBorder />
+                )}
+              </button>
+            </li>
+          )}
+        </EmoticonList>
+      </Flex>
       <EmoticonList>
         {emoticonList &&
           emoticonList.map((el) => (

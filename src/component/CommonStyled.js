@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const H2Style = styled.h2`
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+`;
+
 export const TagListBox = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +15,7 @@ export const TagListBox = styled.div`
   top: 60px;
   background: #fff;
   padding: 15px 0;
+  z-index: 10;
   button {
     font-size: 14px;
   }

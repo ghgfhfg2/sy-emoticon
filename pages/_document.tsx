@@ -5,7 +5,9 @@ class MyDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
-          <title>텍스트 이모티콘 모음</title>
+          <title>
+            특수문자(텍스트) 이모티콘 모음 - Text Emoticon collection
+          </title>
           <meta
             name="keywords"
             content="Text,Emoticon,Text Emoticon,Kaomoji,Face Emoticon,Face,Instagram Emoticon,Lenny Face,Lenny,Symbol,Text Symbol,Artful,Face Type,Designed Text,이모티콘,특수기호,인싸티콘,특수문자,텍대,텍스트"
