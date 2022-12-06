@@ -32,6 +32,7 @@ const HeaderTop = styled.div`
     width: 200px;
   }
   .logo {
+    font-family: "Rajdhani", "NanumGothic", sans-serif;
     cursor: pointer;
     display: flex;
     height: 40px;
@@ -70,6 +71,12 @@ const HeaderTop = styled.div`
         color: #fff;
       }
     }
+  }
+  .hidden {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: -1;
   }
   .right {
     display: flex;
@@ -132,9 +139,10 @@ function Header({ logoImg }) {
       <HeaderTop>
         <div className="left">
           <div className="logo_box">
-            <h1 className="logo">
+            <div className="logo">
               <Link href="/">My Text Emoticon</Link>
-            </h1>
+              <h1 className="hidden">특수문자 이모티콘</h1>
+            </div>
           </div>
           <ul className="menu">
             <li className={router.route.indexOf("/add") > -1 ? "on" : ""}>

@@ -1,5 +1,49 @@
 import styled from "styled-components";
 
+export const InfoBox = styled.div`
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 1200px;
+  border: 1px solid #ddd;
+  padding: 2rem;
+  border-radius: 10px;
+  background: #f2f2f2;
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #3182ce;
+    padding-left: 12px;
+    position: relative;
+    &::before {
+      content: "";
+      display: block;
+      width: 3px;
+      height: 16px;
+      background: #3182ce;
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  }
+  ul {
+    padding-left: 25px;
+    li {
+      list-style: disc;
+      color: #666;
+    }
+  }
+  p {
+    color: #666;
+  }
+`;
+
 export const H2Style = styled.h2`
   display: flex;
   justify-content: center;

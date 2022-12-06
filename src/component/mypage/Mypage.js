@@ -9,6 +9,7 @@ import { EmoticonList } from "@component/CommonStyled";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { TagListBox } from "../CommonStyled";
 import GoogleAd from "../GoogleAd";
+import Head from "next/head";
 
 export default function Mypage() {
   const toast = useToast();
@@ -62,68 +63,73 @@ export default function Mypage() {
   };
 
   return (
-    <div className="content_box">
-      <GoogleAd />
-      {isLoading && (
-        <Spinner
-          style={{
-            position: "fixed",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%,-50%)",
-          }}
-        />
-      )}
-      <TagListBox>
-        {tagList && (
-          <>
-            <Button
-              onClick={() => typeSort("")}
-              margin={1}
-              colorScheme="blue"
-              variant={type === "" ? "solid" : "outline"}
-            >
-              전체
-            </Button>
-            {tagList.map((el, idx) => (
-              <>
-                <Button
-                  onClick={() => typeSort(el)}
-                  margin={1}
-                  colorScheme="blue"
-                  variant={type === el ? "solid" : "outline"}
+    <>
+      <Head>
+        <title>특수문자(텍스트) 이모티콘 모음 - Text Emoticon collection</title>
+      </Head>
+      <div className="content_box">
+        <GoogleAd />
+        {isLoading && (
+          <Spinner
+            style={{
+              position: "fixed",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          />
+        )}
+        <TagListBox>
+          {tagList && (
+            <>
+              <Button
+                onClick={() => typeSort("")}
+                margin={1}
+                colorScheme="blue"
+                variant={type === "" ? "solid" : "outline"}
+              >
+                전체
+              </Button>
+              {tagList.map((el, idx) => (
+                <>
+                  <Button
+                    onClick={() => typeSort(el)}
+                    margin={1}
+                    colorScheme="blue"
+                    variant={type === el ? "solid" : "outline"}
+                  >
+                    {el}
+                  </Button>
+                </>
+              ))}
+            </>
+          )}
+        </TagListBox>
+        <EmoticonList>
+          {myEmoticon &&
+            myEmoticon.map((el) => (
+              <li key={el.uid}>
+                <button
+                  type="button"
+                  className="btn_emo"
+                  onClick={() => onCopy(el)}
                 >
-                  {el}
-                </Button>
-              </>
+                  {el.emo}
+                </button>
+                <button
+                  type="button"
+                  className="btn_favor"
+                  onClick={() => unFavor(el)}
+                >
+                  <MdFavorite />
+                </button>
+              </li>
             ))}
-          </>
-        )}
-      </TagListBox>
-      <EmoticonList>
-        {myEmoticon &&
-          myEmoticon.map((el) => (
-            <li key={el.uid}>
-              <button
-                type="button"
-                className="btn_emo"
-                onClick={() => onCopy(el)}
-              >
-                {el.emo}
-              </button>
-              <button
-                type="button"
-                className="btn_favor"
-                onClick={() => unFavor(el)}
-              >
-                <MdFavorite />
-              </button>
-            </li>
-          ))}
-        {!myEmoticon && (
-          <span style={{ color: "#999" }}>즐겨찾는 이모티콘이 없습니다.</span>
-        )}
-      </EmoticonList>
-    </div>
+          {!myEmoticon && (
+            <span style={{ color: "#999" }}>즐겨찾는 이모티콘이 없습니다.</span>
+          )}
+        </EmoticonList>
+      </div>
+    </>
   );
 }

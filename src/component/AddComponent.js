@@ -34,6 +34,7 @@ import LoginLayout from "@component/LoginLayout";
 import shortid from "shortid";
 import GoogleAd from "./GoogleAd";
 import { useSelector } from "react-redux";
+import Head from "next/head";
 
 export default function AddComponent() {
   const userInfo = useSelector((state) => state.user.currentUser);
@@ -153,6 +154,9 @@ export default function AddComponent() {
 
   return (
     <>
+      <Head>
+        <title>특수문자(텍스트) 이모티콘 모음 - Text Emoticon collection</title>
+      </Head>
       <GoogleAd />
       <Notice>
         <Flex alignItems="center">
