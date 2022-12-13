@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const HiddenText = styled.div`
+  width: 0;
+  height: 0;
+  z-index: -1;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
+`;
+
 export const InfoBox = styled.div`
   margin: 2rem auto;
   width: 90%;
