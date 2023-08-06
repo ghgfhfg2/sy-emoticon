@@ -49,7 +49,7 @@ export default function Main() {
         return el;
       });
       if (type) {
-        arr = arr.filter((el) => el.tag === type);
+        arr = arr.filter((el) => el.tag.indexOf(type) > -1);
       }
       setTimeout(() => {
         resolve(arr);
@@ -153,10 +153,8 @@ export default function Main() {
           />
           <Flex flexDirection="column">
             <p>
-              - 이모티콘 신청을 통해 새로운 이모티콘이 계속 추가 될 예정입니다
-              :)
+              - 이모티콘 신청을 통해 새로운 이모티콘이 계속 추가 될 예정입니다.
             </p>
-            <p>- 감정 태그는 현재 업데이트 진행중 입니다. </p>
           </Flex>
         </Flex>
         <TagListBox>
